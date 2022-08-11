@@ -1,0 +1,117 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<locale.h>
+	
+#define TAM 30 
+	
+        struct vacina
+	{
+	char numerolote[10];
+	char nomevacina[30];
+	char str_data[10];
+	};
+	
+	struct pessoa
+	{
+	int codigo;
+	char nomepessoa[30];
+	char str_cpf[11];
+	char str_busca[11];
+	};
+	   
+	int main()
+	{
+		setlocale(LC_ALL, "Portuguese");
+	   struct vacina aplicacao[30];
+	   struct pessoa cadastro[30];
+	   int i = 0;
+	   int acha= 0;
+	   int op = 0;
+	   int encontrado = 0;
+	   int codigo = 0;
+	   char busca[20];
+		
+	   while (op!=4)
+	  {
+	    printf("1-Cadastrar a aplicação de vacina.\n");
+	    printf("2-Listar aplicações.\n");
+	    printf("3-Consula CPF.\n");
+	    printf("4-Sair.\n");
+	    scanf("%d",&op);
+	    fflush(stdin);
+	     
+		if(op==1)
+	    {
+	        system("cls");
+	         
+	    	cadastro[i].codigo = codigo++;
+		    printf("Digite o nome:");
+		    scanf("%s", cadastro[i].nomepessoa);
+		    fflush(stdin);
+		    printf("Digite o CPF:");
+		    scanf("%s", cadastro[i].str_cpf);
+		    fflush(stdin);
+		    printf("Digite o nome da vacina:");
+		    scanf("%s", aplicacao[i].nomevacina);
+		    fflush(stdin);
+		    printf("Digite a data da aplicação:");
+		    scanf("%s", aplicacao[i].str_data);
+		    fflush(stdin);
+		    printf("Digite o número do lote:");
+		    scanf("%s", aplicacao[i].numerolote);
+			fflush(stdin);
+		    i++;
+		    printf("\n");
+		}
+		else if(op==2)
+		{				
+			system("cls");
+			for(i=0; i<codigo; i++)
+				{
+				printf("\nCodigo: %d", cadastro[i].codigo);
+				printf("\nNomepessoa: %s", cadastro[i].nomepessoa);
+				printf("\nCPF: %s", cadastro[i].str_cpf);
+				printf("\nVacina: %s", aplicacao[i].nomevacina);
+				printf("\nstr_data: %s", aplicacao[i].str_data);
+			    printf("\nNumerolote: %s\n", aplicacao[i].numerolote);
+			    printf("\n----------------------------------------\n");
+			}
+		}
+		else if(op==3)
+		{
+			encontrado = 0;
+			i = 0;
+			system("cls");
+
+			printf("Digite o numero do CPF que deseja buscar: ");
+			scanf("%s", busca);
+			
+			while((i < codigo) && (encontrado == 0)) {
+				if(strcmp(cadastro[i].str_cpf, busca)==0) {
+					encontrado = 1;
+				}
+				else i++;
+			}
+			
+			if(encontrado == 1)	{
+				printf("\n CPF já cadastrado:");
+				printf("\nCodigo: %d", cadastro[i].codigo);
+				printf("\nNomepessoa: %s", cadastro[i].nomepessoa);
+				printf("\nCPF: %s", cadastro[i].str_cpf);
+				printf("\nVacina: %s", aplicacao[i].nomevacina);
+				printf("\nstr_data: %s", aplicacao[i].str_data);
+			    printf("\nNumerolote: %s\n", aplicacao[i].numerolote); 
+			    fflush(stdin);
+			    printf("\n");
+			} else {
+				printf("\n CPF não cadastrado.\n");
+				op = 4;
+				break;
+			}
+				
+		}
+		
+	}
+	return 0;
+}
